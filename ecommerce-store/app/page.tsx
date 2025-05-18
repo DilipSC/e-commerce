@@ -2,6 +2,26 @@ import { Button } from "@/components/ui/button"
 import { FeaturedProducts } from "@/components/featured-products"
 import Link from "next/link"
 
+type Category = {
+  name: string;
+  image: string;
+}
+
+const shopCategory: Category[] = [
+  {
+    name: "Electronics",
+    image: "https://i.pinimg.com/736x/51/d3/88/51d38806d50482762c700eca5717a32f.jpg",
+  },
+  {
+    name: "Clothing",
+    image: "https://cdn.shopify.com/s/files/1/0070/7032/articles/how_20to_20start_20a_20clothing_20brand_1d5af9da-74c2-4c07-985a-0ccd06d85c1b.png?v=1742241241",
+  },
+  {
+    name: "Home & Kitchen",
+    image: "https://static.vecteezy.com/system/resources/previews/047/308/609/non_2x/a-coffee-maker-coffee-cup-and-knife-on-a-white-background-free-png.png"
+  }
+];
+
 export default function Home() {
   return (
     <div className="flex flex-col gap-12 pb-8">
@@ -34,7 +54,7 @@ export default function Home() {
                 alt="Hero Image"
                 className="aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
                 height="550"
-                src="/placeholder.svg?height=550&width=550"
+                src="https://thumbs.dreamstime.com/b/e-commerce-online-shopping-business-technology-concept-screen-e-commerce-online-shopping-business-technology-concept-screen-207950081.jpg"
                 width="550"
               />
             </div>
@@ -55,23 +75,23 @@ export default function Home() {
         <div className="flex flex-col gap-4">
           <h2 className="text-3xl font-bold tracking-tight">Shop by Category</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {["Electronics", "Clothing", "Home & Kitchen"].map((category) => (
+            {shopCategory.map((category) => (
               <Link
-                key={category}
-                href={`/products?category=${category.toLowerCase().replace(" & ", "-")}`}
+                key={category.name}
+                href={`/products?category=${category.name.toLowerCase().replace(" & ", "-")}`}
                 className="group relative overflow-hidden rounded-lg border bg-background hover:shadow-lg transition-all"
               >
                 <div className="aspect-square overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/0 z-10" />
                   <img
-                    alt={category}
+                    alt={category.name}
                     className="object-cover w-full h-full transition-transform group-hover:scale-105"
                     height="300"
-                    src={`/placeholder.svg?height=300&width=300&text=${category}`}
+                    src={category.image}
                     width="300"
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-20">
-                    <h3 className="text-xl font-bold">{category}</h3>
+                    <h3 className="text-xl font-bold">{category.name}</h3>
                   </div>
                 </div>
               </Link>
